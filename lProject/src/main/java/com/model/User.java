@@ -1,9 +1,19 @@
 package com.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "users")
 public class User {
 	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
 	private String firstName;
@@ -20,15 +30,10 @@ public class User {
 	}
 	
 
-	/**
-	 * @param firstName
-	 * @param lastName
-	 * @param age
-	 * @param country
-	 */
-	public User(Long id, String firstName, String lastName, Integer age, String country) {
+
+	
+	public User (String firstName, String lastName, Integer age, String country) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -57,9 +62,6 @@ public class User {
 		return country;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
