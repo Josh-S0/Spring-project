@@ -32,9 +32,8 @@ public class User {
 
 
 	
-	public User(Long id, String firstName, String lastName, Integer age, String country) {
+	public User (String firstName, String lastName, Integer age, String country) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -63,9 +62,6 @@ public class User {
 		return country;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
