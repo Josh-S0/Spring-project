@@ -1,11 +1,12 @@
 package com.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,9 +29,9 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping
-	public ResponseEntity<?> getAll(){
+	public ResponseEntity<?> getAll(Pageable pageable){
 		
-		return new ResponseEntity<List<User>>(userService.getAll(), HttpStatus.OK);
+		return new ResponseEntity<Page<User>>(userService.getAll(pageable), HttpStatus.OK);
 		
 	}
 	
