@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +13,8 @@ public interface UserService {
 	public Page<User> getAll(Pageable pageable);
 	
 	public Optional<User> getById(Long id);
+	
+	public List<User> findByCriteria(String criteria, String searchItem);
 	
 	public void add(User user);
 	

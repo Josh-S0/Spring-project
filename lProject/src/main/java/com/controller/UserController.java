@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.User;
@@ -28,6 +30,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping("/search")
+	public ResponseEntity<?> findByCriteria(@RequestParam(name = "criteria", required = true) String criteria, @RequestParam(name = "searchItem", required = true) String searchItem){
+		return new ResponseEntity<List<User>>(userService.findByCriteria(criteria, searchItem),HttpStatus.OK);
+		
+	}
 	@GetMapping
 	public ResponseEntity<?> getAll(Pageable pageable){
 		
