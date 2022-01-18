@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.model.User;
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 
 	@Override
 	public List<User> getAll() {
@@ -32,6 +36,7 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public void add(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 	}
 	
@@ -41,7 +46,12 @@ public class UserServiceImpl implements UserService{
 		
 		if(userOpt.isPresent()) {
 			User existingUser = userOpt.get();
-			
+			if(user.getUsername() != null) {
+				existingUser.setUsername(user.getUsername());
+			}
+			if(user.getPassword() != null) {
+				existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+			}
 			if(user.getFirstName() != null) {
 				existingUser.setFirstName(user.getFirstName());
 			}
